@@ -24,6 +24,12 @@ Route.delete('/courses/:id', 'CourseController.destroy').middleware('auth')
 Route.post('courses/:id/videos', 'VideoController.store')
   // .middleware('auth')
 
-Route.get('videos/:path', 'VideoController.show')
-Route.post('videos/completed', 'VideoController.completed')
+//Route.get('/videos/:path', 'VideoController.show')
+Route.get('/videos/courses/:id/:path', 'VideoController.show')
+Route.post('/videos/completed', 'VideoController.completed')
+
+Route.get('/videos/comments/:id', 'VideoController.getComments')
+
+
+Route.post('/videos/comments', 'VideoCommentController.store')
 

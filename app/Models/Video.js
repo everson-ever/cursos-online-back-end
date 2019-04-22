@@ -2,6 +2,7 @@
 
 
 const Model = use('Model')
+const Helpers = use('Helpers')
 const Env = use('Env')
 
 
@@ -15,16 +16,15 @@ class Video extends Model {
     return ['url']
   }
 
-  getUrl ({ path }) {
-    return `${Env.get('APP_URL')}/videos/${path}`
+  getUrl ({ path, course_id }) {
+    //return `${Env.get('APP_URL')}/videos/courses/${course_id}/${path}`
+    return `${Env.get('APP_URL')}/videos/courses/${course_id}/${path}`
   }
 
-  // concluido() {
-  //   this
-  //   .query()
-  //   .where('id', params.id)
-  //   .update({ completed: 1})
-  // }
+  comments() {
+    return this.hasMany('App/Models/Comment')
+  }
+
 }
 
 module.exports = Video

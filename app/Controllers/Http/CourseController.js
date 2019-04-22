@@ -6,6 +6,7 @@
 
 const Course = use('App/Models/Course')
 const Category = use('App/Models/Category');
+const Drive = use('Drive')
 
 
 class CourseController {
@@ -25,25 +26,27 @@ class CourseController {
     ]);
 
     const id_category = request.only([ 'category_id' ]).category_id
-    //return id_category;
+
 
     //Buscando a categoria associada ao curso criado
     const category = await Category.findOrFail(id_category);
 
     const course = await Course.create({ ...data, category_id: id_category});
 
-    //Somando mais um a quantidade de Cursos na categoria
+    //Somando mais um a quantidade de Cursos na categoria quando um curso for criado
     await Category
     .query()
     .where('id', id_category)
     .update({ qtd_courses: category.qtd_courses + 1})
 
     return course;
+
+    //await Drive.put('hello.txt', Buffer.from('/teste'))
   }
 
 
-  async show ({ params, request, response, view }) {
-
+  //Retorna um curso com seus vídeos associados
+  async show ({ params }) {
     const course = await Course.findOrFail(params.id)
     await course.load('videos')
 

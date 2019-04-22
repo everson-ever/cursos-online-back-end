@@ -27,7 +27,7 @@ class CategoryController {
   }
 
 
-  async show ({ params, request, response, view }) {
+  async show ({ params, request, response }) {
 
     const category = await Category.findOrFail(params.id)
     await category.load('courses')

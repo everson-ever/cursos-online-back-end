@@ -16,6 +16,7 @@ class CourseSchema extends Schema {
         .onDelete('CASCADE')
       table.string('name').notNullable()
       table.integer('qtd_videos').notNullable().defaultTo(0)
+      table.integer('complete_videos').defaultTo(0)
       table.string('description').notNullable()
       table.boolean('completed').notNullable().defaultTo(false)
 
